@@ -169,7 +169,7 @@ Interval
 ```
 
 ```r
-#plot(average_steps~interval,Interval,type="l",ylab="Average Steps",xlab="Time interval",main="Average Daily Activity Pattern")
+plot(average_steps~interval,Interval,type="l",ylab="Average Steps",xlab="Time interval",main="Average Daily Activity Pattern")
 which.max(Interval$average_steps)
 ```
 
