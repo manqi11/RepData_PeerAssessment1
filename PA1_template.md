@@ -155,6 +155,10 @@ plot(Interval$interval,Interval$average_steps,type="l",ylab="Average Steps",xlab
 ![](PA1_template_files/figure-html/unnamed-chunk-3-1.png)<!-- -->
 
 ```r
+<<<<<<< HEAD
+=======
+plot(average_steps~interval,Interval,type="l",ylab="Average Steps",xlab="Time interval",main="Average Daily Activity Pattern")
+>>>>>>> d17931222009f7c3392c9e12f03d700865172a24
 which.max(Interval$average_steps)
 ```
 
