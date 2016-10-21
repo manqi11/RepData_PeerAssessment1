@@ -6,7 +6,7 @@ output:
 ---
 ## Loading and preprocessing the data
 ```{r, echo=TRUE}
-setwd("/Users/pzhou5/Dropbox/Coursera/05 Reproducable Data")
+setwd("~/Dropbox/05 Reproducable Data")
 download.file(url="https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity",destfile="Activity_Monitoring_Data.zip",method="curl")
 unzip("Activity_Monitoring_Data.zip")
 Activity<-read.csv("activity.csv",head=TRUE,sep=",",na="NA")
@@ -34,12 +34,12 @@ Then I plot it. Using which.max () function I found that 13:55pm is the time int
 that had the max average steps across all days.
 
 ```{r,echo=TRUE}
-interval_group<-group_by(Activity,interval)
+interval_group<-group_by(na.omit(Activity),interval)
 interval_group
 Interval<-summarize(interval_group,average_steps=mean(steps))
-Interval
 
-#plot(average_steps~interval,Interval,type="l",ylab="Average Steps",xlab="Time interval",main="Average Daily Activity Pattern")
+plot(Interval$interval,Interval$average_steps,type="l",ylab="Average Steps",xlab="Time interval",main="Average Daily Activity Pattern")
+
 which.max(Interval$average_steps)
 Interval[104,]
 835/60 # 

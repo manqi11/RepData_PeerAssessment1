@@ -2,7 +2,7 @@
 ## Loading and preprocessing the data
 
 ```r
-setwd("/Users/pzhou5/Dropbox/Coursera/05 Reproducable Data")
+setwd("~/Dropbox/05 Reproducable Data")
 download.file(url="https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity",destfile="Activity_Monitoring_Data.zip",method="curl")
 unzip("Activity_Monitoring_Data.zip")
 ```
@@ -78,7 +78,7 @@ Summary
 ```
 
 ```
-## # A tibble: 61 × 2
+## # A tibble: 61 x 2
 ##          date total_steps
 ##        <fctr>       <int>
 ## 1  2012-10-01           0
@@ -123,58 +123,43 @@ that had the max average steps across all days.
 
 
 ```r
-interval_group<-group_by(Activity,interval)
+interval_group<-group_by(na.omit(Activity),interval)
 interval_group
 ```
 
 ```
-## Source: local data frame [17,568 x 3]
+## Source: local data frame [15,264 x 3]
 ## Groups: interval [288]
 ## 
 ##    steps       date interval
-##    <int>     <fctr>    <int>
-## 1     NA 2012-10-01        0
-## 2     NA 2012-10-01        5
-## 3     NA 2012-10-01       10
-## 4     NA 2012-10-01       15
-## 5     NA 2012-10-01       20
-## 6     NA 2012-10-01       25
-## 7     NA 2012-10-01       30
-## 8     NA 2012-10-01       35
-## 9     NA 2012-10-01       40
-## 10    NA 2012-10-01       45
-## # ... with 17,558 more rows
+## *  <int>     <fctr>    <int>
+## 1      0 2012-10-02        0
+## 2      0 2012-10-02        5
+## 3      0 2012-10-02       10
+## 4      0 2012-10-02       15
+## 5      0 2012-10-02       20
+## 6      0 2012-10-02       25
+## 7      0 2012-10-02       30
+## 8      0 2012-10-02       35
+## 9      0 2012-10-02       40
+## 10     0 2012-10-02       45
+## # ... with 15,254 more rows
 ```
 
 ```r
 Interval<-summarize(interval_group,average_steps=mean(steps))
-Interval
+
+plot(Interval$interval,Interval$average_steps,type="l",ylab="Average Steps",xlab="Time interval",main="Average Daily Activity Pattern")
 ```
 
-```
-## # A tibble: 288 × 2
-##    interval average_steps
-##       <int>         <dbl>
-## 1         0            NA
-## 2         5            NA
-## 3        10            NA
-## 4        15            NA
-## 5        20            NA
-## 6        25            NA
-## 7        30            NA
-## 8        35            NA
-## 9        40            NA
-## 10       45            NA
-## # ... with 278 more rows
-```
+![](PA1_template_files/figure-html/unnamed-chunk-3-1.png)<!-- -->
 
 ```r
-#plot(average_steps~interval,Interval,type="l",ylab="Average Steps",xlab="Time interval",main="Average Daily Activity Pattern")
 which.max(Interval$average_steps)
 ```
 
 ```
-## integer(0)
+## [1] 104
 ```
 
 ```r
@@ -182,10 +167,10 @@ Interval[104,]
 ```
 
 ```
-## # A tibble: 1 × 2
+## # A tibble: 1 x 2
 ##   interval average_steps
 ##      <int>         <dbl>
-## 1      835            NA
+## 1      835      206.1698
 ```
 
 ```r
